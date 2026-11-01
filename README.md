@@ -34,30 +34,8 @@ The public file is about 34 MB compressed; the script caches it separately and s
 
 Optional actual ECG dataset: PTB-XL+, DOI **10.13026/g6h6-7g88**, https://physionet.org/content/ptb-xl-plus/1.0.1/. The optional ECG script needs a uniquely named *signed* lead-I amplitude, and aborts if one cannot be identified. It provides only a sign-masking KDE illustration, not Gaussian-error deconvolution.
 
-## Colab instructions
 
-**Easiest:** upload `Symmetry_Resolved_Complete_Code.zip` to Colab; open `COLAB_RUN.ipynb` locally or execute the following Colab code:
 
-```python
-from google.colab import files
-uploaded = files.upload()  # select Symmetry_Resolved_Complete_Code.zip
-import zipfile, glob, os
-package = next(k for k in uploaded if k.endswith('.zip'))
-with zipfile.ZipFile(package) as z: z.extractall('/content/symmetry_code')
-%cd /content/symmetry_code
-!python test_self_checks.py
-!python run_all_colab.py --profile standard
-result = glob.glob('/content/Symmetry_Resolved_Results_standard_*.zip')
-files.download(result[-1])
-```
-
-`--profile quick` gives a smaller initial test; `--profile full` increases replication counts substantially. `--profile standard` is the recommended first research run. Outputs depend on dataset access and Colab resources; no wall-time guarantee is made.
-
-Manual source override:
-
-```
-python run_all_colab.py --profile standard --gwas-file /content/GIANT_HEIGHT_Wood_et_al_2014_publicrelease_HapMapCeuFreq.txt.gz
-```
 
 Optional ECG (downloads ~89 MB):
 
@@ -76,18 +54,13 @@ python run_all_colab.py --profile standard --ecg
 7. The Fourier estimator is allowed to be negative. Do not silently rebrand positivity-projected versions as the theoretical estimator.
 8. A failed download must produce an explicit failure (and potentially simulation-only results), never invented real-data output.
 
-## Recommended main figures
+##  main figures
 
 - Introduction: `GWAS_MOTIVATION/figures/M01_real_gwas_intro_motivation.pdf`
 - Main numerical theory: `SIMULATION/figures/S01_information_phase_transition.pdf`
 - Main real analysis: `GWAS_FULL/figures/R02_invariant_vs_odd_discrepancy.pdf`
 - Supplement: all other plots, numerical tables, robustness studies.
 
-## Suggested future declarations (only AFTER actual runs)
-
-**Data availability:** GIANT height GWAS summary statistics, Wood et al. (2014), publicly available from the GIANT Consortium (URL and date accessed to be supplied). PTB-XL+ if used: PhysioNet, DOI 10.13026/g6h6-7g88.
-
-**Code availability:** Add the actual persistent repository URL after uploading scripts, exact release identifier and computational environment. Do not invent a GitHub URL.
 
 ## Output
 
